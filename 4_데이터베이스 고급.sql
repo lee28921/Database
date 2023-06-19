@@ -60,7 +60,7 @@ INSERT INTO `Sales` (`uid`,`year`,`month`,`sale`) VALUES('a106','2018',2,53000);
 INSERT INTO `Sales` (`uid`,`year`,`month`,`sale`) VALUES('a101','2019',1,24000);
 INSERT INTO `Sales` (`uid`,`year`,`month`,`sale`) VALUES('a102','2019',1,109000);
 INSERT INTO `Sales` (`uid`,`year`,`month`,`sale`) VALUES('a103','2019',1,101000);
-INSERT INTO `Sales` (`uid`,`year`,`month`,`sale`) VALUES('a104','2019',1,535000);
+INSERT INTO `Sales` (`uid`,`year`,`month`,`sale`) VALUES('a104','2019',1,53500);
 INSERT INTO `Sales` (`uid`,`year`,`month`,`sale`) VALUES('a107','2019',1,24000);
 
 INSERT INTO `Sales` (`uid`,`year`,`month`,`sale`) VALUES('a102','2019',2,160000);
@@ -95,8 +95,8 @@ SELECT * FROM `Sales` WHERE `sale` BETWEEN 50000 AND 100000;
 
 #실습 4-4 오름/내림차순으로 정렬
 SELECT * FROM `Sales` ORDER BY `sale`;
-SELECT * FROM `Sales` ORDER BY `sale` ASC; #내림차
-SELECT * FROM `Sales` ORDER BY `sale` DESC; #오름차
+SELECT * FROM `Sales` ORDER BY `sale` ASC; #오름차
+SELECT * FROM `Sales` ORDER BY `sale` DESC; #내림차
 SELECT * FROM `Sales` WHERE `sale` > 50000
 ORDER BY `sale` DESC;
 
@@ -111,7 +111,7 @@ ORDER BY
 SELECT * FROM `Sales` LIMIT 3; # 상위 3개만 출력
 SELECT * FROM `Sales` LIMIT 0, 3; # 0에서 부터 아래 3개를 출력
 SELECT * FROM `Sales` LIMIT 1, 2; 
-SELECT * FROM `Sales` LIMIT 5, 3; #5에서 부터 아래 3개를 실행
+SELECT * FROM `Sales` LIMIT 5, 4; #5에서 부터 아래 4개를 실행
 
 SELECT * FROM `Sales`
 WHERE 
@@ -154,9 +154,25 @@ WHERE
 
  
 #실습 4-7 
-
+SELECT SUM(`sale`) AS `합계`
+FROM `Sales`
+WHERE 
+	`year`=2018 AND
+	`month`=1;
 #실습 4-8
+SELECT SUM(`sale`) AS `합계`,
+		AVG(`sale`) AS `평균`
+FROM `Sales`
+WHERE
+	`year`=2019 AND
+	`month`=2 AND
+	`sale` >= 50000;
 #실습 4-9
+SELECT MIN(`sale`) AS `최저`,
+		 MAX(`sale`) AS `최고`
+FROM `Sales`
+WHERE
+	`year`=2020;
 #실습 4-10
 SELECT VERSION(); 데이터를 그룹으로 조회
 SELECT `uid` FROM `Sales` GROUP BY `uid`; 
