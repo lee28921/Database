@@ -344,3 +344,7 @@ where `year`=2019 and `sale` >= 50000
 group by a.`uid`
 having `매출합` >= 100000
 order by `매출합` DESC;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9e624c64a1907d868a6e00a7d5657abb7550a774
