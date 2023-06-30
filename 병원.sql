@@ -171,4 +171,4 @@ FROM `Patients` AS a
 JOIN `Nurses` AS b ON a.nur_id = b.nur_id
 GROUP BY a.`nur_id`
 ORDER BY `환자수` DESC
-LIMIT 1;
+LIMIT 1;shopping

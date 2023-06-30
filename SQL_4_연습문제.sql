@@ -237,4 +237,4 @@ SELECT * FROM `Customer`;
 
 #실습 4-46
 DELETE FROM`Customer` WHERE `custId`=5;
-SELECT * FROM `Customer`;
+SELECT * FROM `Customer`;bookstore

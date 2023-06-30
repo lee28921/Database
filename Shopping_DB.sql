@@ -121,8 +121,7 @@ SELECT `userName`,`prodName`,`cartProdCount`
 FROM `Carts` AS a
 JOIN `Users` AS b ON a.userId = b.userId
 JOIN `Products` AS c ON a.prodNo = c.prodNo
-ORDER BY `cartProdCount` DESC
-LIMIT 2;
+WHERE `cartProdCount` >=2;
 
 #문제2
 SELECT `prodNo`,`cateName`,`prodName`,`prodPrice`,`sellerManager`,`sellerPhone`
@@ -131,7 +130,8 @@ JOIN `Categories` AS b ON a.cateNo = b.cateNo
 JOIN `Sellers` AS c ON a.sellerNo = c.sellerNo;
 
 #문제3
-SELECT a.`userId`,`userName`,`userHp`,`userPoint`,SUM(`userPoint`+`point`) AS `적립포인트 총합`
+SELECT a.`userId`,`userName`,`userHp`,`userPoint`,
+		SUM(`userPoint`+`point`)AS `적립포인트 총합`
 FROM `Users` AS a
 JOIN `Points` AS b ON a.userId = b.userId
 GROUP BY a.`userId`;
@@ -140,26 +140,32 @@ GROUP BY a.`userId`;
 SELECT a.`orderNo`,a.`userId`,`userName`,`orderTotalPrice`,`orderDate`
 FROM `Orders` AS a
 JOIN `Users` AS b ON a.userId = b.userId
-JOIN `OrderItems` AS c ON a.orderNo = c.orderNo
-JOIN `Products` AS d ON c.prodNo = d.prodNo
 WHERE `orderTotalPrice`>=100000
 GROUP BY a.`orderNo`,a.`userId`
 ORDER BY `orderTotalPrice` DESC ,`userName` ASC;
 
 #문제5
 
-SELECT a.`orderNo`,a.`userId`,`userName`,GROUP_CONCAT(`prodName`,', ') AS `상품명`,`orderDate`
+SELECT ANY_VALUE(a.`orderNo`),ANY_VALUE(a.`userId`),ANY_VALUE(`userName`),
+			GROUP_CONCAT(`prodName` SEPARATOR ', ') AS `상품명`,
+			ANY_VALUE(`orderDate`)
 FROM `Orders` AS a
 JOIN `Users` AS b ON a.userId = b.userId
 JOIN `OrderItems` AS c ON a.orderNo = c.orderNo
 JOIN `Products` AS d ON c.prodNo = d.prodNo
-GROUP BY a.`orderNo`,a.`userId`,`userName`,`prodName`; #중복제거가 안돼
+GROUP BY a.`orderNo`; #중복제거가 안돼
 
 #문제6
 SELECT `prodNo`,`prodName`,`prodPrice`,`prodDiscount`,
-			COALESCE(`prodPrice`-(`prodPrice`/`ProdDiscount`)) AS `할인된 가격`
-FROM `Products`
-;
+			FLOOR(COALESCE(`prodPrice`*(1- `ProdDiscount`/100),`prodPrice`)) AS `할인된 가격`
+FROM `Products`;
 
-#문제7
+#문제7 고소영 판매자가 판매하는 모든 상품의 상품번호, 상품명, 상품가격, 재고수량, 판매자 이름을 조회하시오
+
 #문제8
+
+#문제9 
+SELECT *
+FROM `OrderItems`;
+#문제10
+

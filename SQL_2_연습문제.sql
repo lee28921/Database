@@ -218,6 +218,11 @@ SELECT
 FROM `bank_transaction` AS a
 JOIN `bank_account` AS b ON a.t_a_no = b.a_no
 JOIN `bank_customer` AS c ON b.a_c_no = c.c_no
-WHERE `t_dist` IN (1,2) AND `c_dist` = 1
-GROUP BY `c_no`
+WHERE `t_dist` IN(1, 2) AND `c_dist` = 1
+GROUP BY `t_no`,
+	`a_no`,
+	`c_no`,
+	`t_dist`,
+	`a_item_name`,
+	`c_name`
 ORDER BY `t_dist`,`거래건수` DESC;

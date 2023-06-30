@@ -153,26 +153,22 @@ WHERE
 	
 
  
-#실습 4-7 
+#실습 4-7 2018년 1월 매출의 총합
 SELECT SUM(`sale`) AS `합계`
 FROM `Sales`
-WHERE 
+WHERE
 	`year`=2018 AND
 	`month`=1;
-#실습 4-8
+#실습 4-8 2019년 2월에 5만원 이상 매출에 대한 총합과 평균
 SELECT SUM(`sale`) AS `합계`,
-		AVG(`sale`) AS `평균`
+AVG(`sale`) AS `평균`
 FROM `Sales`
-WHERE
-	`year`=2019 AND
+WHERE 
+	`year`= 2019 AND
 	`month`=2 AND
-	`sale` >= 50000;
-#실습 4-9
-SELECT MIN(`sale`) AS `최저`,
-		 MAX(`sale`) AS `최고`
-FROM `Sales`
-WHERE
-	`year`=2020;
+	`sale` >=50000;
+#실습 4-9 2020년 전체 매출 가운데 최저, 최고, 매출
+
 #실습 4-10
 SELECT VERSION(); 데이터를 그룹으로 조회
 SELECT `uid` FROM `Sales` GROUP BY `uid`; 
@@ -344,7 +340,3 @@ where `year`=2019 and `sale` >= 50000
 group by a.`uid`
 having `매출합` >= 100000
 order by `매출합` DESC;
-<<<<<<< HEAD
-=======
-
->>>>>>> 9e624c64a1907d868a6e00a7d5657abb7550a774
